@@ -1,19 +1,28 @@
 #!/bin/bash
 
-# Script to push to your forked repository
+# Script to fork and push to a new GitHub repository
 
-echo "DEX-OS Push to Fork Script"
-echo "======================="
+echo "DEX-OS Fork and Push Script"
+echo "========================="
 
 echo ""
-echo "This script will push your DEX-OS code to your forked repository."
+echo "Instructions:"
+echo "1. First, fork the repository on GitHub:"
+echo "   - Go to https://github.com/flodecentralizedchat-source/DEX-OS"
+echo "   - Click the \"Fork\" button"
+echo "   - Choose your GitHub account as the destination"
 echo ""
+echo "2. After forking, this script will push your code to your fork."
 
+echo ""
 read -p "Enter your GitHub username: " github_username
 
 echo ""
+read -p "Press Enter to continue with the push process..."
+
+echo ""
 echo "Setting remote URL to your fork..."
-cd d:\DEX-OS\dex-os\dex-os
+cd /d d:\DEX-OS\dex-os\dex-os
 git remote set-url origin https://github.com/$github_username/DEX-OS.git
 
 echo ""
@@ -21,8 +30,11 @@ echo "Pushing code to your fork..."
 git push -u origin main
 
 echo ""
-echo "Push completed! Your repository should now be available at:"
+echo "Push completed! Your fork should now be available at:"
 echo "https://github.com/$github_username/DEX-OS"
 
 echo ""
 echo "Your commits will appear as \"Verified\" because your GPG key is already set up on GitHub."
+
+echo ""
+echo "After pushing to your fork, you can create a pull request to contribute your changes to the original repository."
