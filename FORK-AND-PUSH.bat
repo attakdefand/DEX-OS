@@ -37,4 +37,7 @@ echo 2. Go to GitHub Settings ^> Developer settings ^> Personal access tokens
 echo 3. Generate a new token with "repo" scope
 echo 4. Use this token when prompted for password
 
+echo.
+echo After pushing to your fork, you can create a pull request to contribute your changes to the original repository.
+
 pause
