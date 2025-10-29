@@ -1,0 +1,56 @@
+[workspace]
+members = [
+    "crates/security",
+    "crates/crypto",
+    "crates/p2p",
+    "kernel",
+    "chains/evm",
+    "chains/svm",
+    "chains/svm/programs",
+    "chains/cosmwasm",
+    "chains/cosmwasm/contracts",
+    "chains/ibc",
+    "plugins/hooks",
+    "plugins/ai",
+    "plugins/mev",
+    "services/p2p",
+    "services/indexer-zk",
+    "services/api",
+    "services/bundler-zk",
+    "services/security-monitor",
+    "services/dex-core",
+    "ui/pwa",
+    "ui/tauri",
+    "ui/ai-chat",
+    "tests",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+
+[workspace.dependencies]
+# Shared dependencies
+ethereum-types = "0.14"
+ethers = "2.0"
+tokio = "1.14.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+tracing = "0.1"
+sha2 = "0.10"
+futures = "0.3"
+yew = "0.21"
+wasm-bindgen = "0.2"
+jni = "0.21"
+rand = "0.8"
+
+# Version constraints to resolve conflicts
+zeroize = "1.3.0"
+
+# Internal dependencies
+security = { path = "crates/security" }
+crypto = { path = "crates/crypto" }
+p2p = { path = "crates/p2p" }

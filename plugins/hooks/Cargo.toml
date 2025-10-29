@@ -1,0 +1,7 @@
+[package]
+name = "hooks-plugin"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# Hooks plugin dependencies will be listed here

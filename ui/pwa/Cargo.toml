@@ -1,0 +1,9 @@
+[package]
+name = "dexos-pwa"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+yew = { workspace = true }
+wasm-bindgen = { workspace = true }
+tokio = { workspace = true }

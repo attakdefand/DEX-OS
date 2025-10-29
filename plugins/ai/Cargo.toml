@@ -1,0 +1,7 @@
+[package]
+name = "ai-plugin"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# AI plugin dependencies will be listed here

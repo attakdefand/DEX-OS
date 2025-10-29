@@ -1,0 +1,7 @@
+[package]
+name = "indexer-zk-service"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# ZK indexer service dependencies will be listed here

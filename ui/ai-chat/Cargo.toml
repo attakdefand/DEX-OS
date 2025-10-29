@@ -1,0 +1,7 @@
+[package]
+name = "dexos-ai-chat"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# AI chat dependencies will be listed here

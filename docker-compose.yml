@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  dexos-dev:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+    volumes:
+      - .:/dexos
+      - cargo-registry:/usr/local/cargo/registry
+    environment:
+      - RUST_BACKTRACE=1
+    command: cargo run
+
+  local-chain:
+    image: hyperledger/besu:latest
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+    command: [
+      "--genesis-file=/opt/besu/genesis.json",
+      "--network-id=2025",
+      "--rpc-http-enabled",
+      "--rpc-http-host=0.0.0.0",
+      "--rpc-http-port=8545",
+      "--rpc-http-cors-origins=*",
+      "--rpc-ws-enabled",
+      "--rpc-ws-host=0.0.0.0",
+      "--rpc-ws-port=8546"
+    ]
+    volumes:
+      - ./infra/docker/genesis.json:/opt/besu/genesis.json
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: dexos
+      POSTGRES_PASSWORD: dexos_password
+      POSTGRES_DB: dexos_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
+  cargo-registry:

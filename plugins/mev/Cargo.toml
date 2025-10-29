@@ -1,0 +1,7 @@
+[package]
+name = "mev-plugin"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# MEV plugin dependencies will be listed here

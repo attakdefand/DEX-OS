@@ -1,0 +1,8 @@
+{
+  "name": "DEX-OS",
+  "short_name": "DEXOS",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "A decentralized exchange operating system"
+}

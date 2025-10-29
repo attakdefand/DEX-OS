@@ -1,0 +1,7 @@
+[package]
+name = "dexos-tauri"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+tauri = "1.0"

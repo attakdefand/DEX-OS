@@ -1,0 +1,25 @@
+[package]
+name = "svm-chain"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# SVM dependencies - using versions compatible with zeroize 1.3.0
+solana-sdk = { version = "1.16", optional = true }
+solana-client = { version = "1.16", optional = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+# Security and crypto dependencies
+security = { path = "../../crates/security" }
+crypto = { path = "../../crates/crypto" }
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# Explicitly specify zeroize version to avoid conflicts
+zeroize = "1.3.0"
+
+[features]
+default = ["solana"]
+solana = ["solana-sdk", "solana-client"]

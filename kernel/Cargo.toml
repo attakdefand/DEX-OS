@@ -1,0 +1,9 @@
+[package]
+name = "kernel"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+security = { path = "../crates/security" }
+crypto = { path = "../crates/crypto" }
+p2p = { path = "../crates/p2p" }

@@ -1,0 +1,7 @@
+[package]
+name = "ibc-chain"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# IBC dependencies will be listed here

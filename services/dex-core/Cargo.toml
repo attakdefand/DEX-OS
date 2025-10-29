@@ -1,0 +1,15 @@
+[package]
+name = "dex-core"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+futures = { workspace = true }
+security = { path = "../../crates/security" }
+crypto = { path = "../../crates/crypto" }
+ethereum-types = { workspace = true }

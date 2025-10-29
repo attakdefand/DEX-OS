@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DEX-OS</string>
+    <string name="start_kernel">Start DEX-OS Kernel</string>
+    <string name="stop_kernel">Stop DEX-OS Kernel</string>
+    <string name="kernel_running">Kernel Running</string>
+    <string name="kernel_stopped">Kernel Stopped</string>
+</resources>

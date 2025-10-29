@@ -1,0 +1,53 @@
+# Compiled files
+target/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Rust related
+**/*.rs.bk
+Cargo.lock
+
+# Android
+*.apk
+*.aab
+
+# Temporary files
+tmp/
+temp/
+
+# Node.js
+node_modules/
+
+# WebAssembly
+*.wasm

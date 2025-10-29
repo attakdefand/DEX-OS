@@ -1,0 +1,7 @@
+[package]
+name = "svm-programs"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# SVM programs dependencies will be listed here

@@ -1,0 +1,7 @@
+[package]
+name = "cosmwasm-contracts"
+version = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+# CosmWasm contracts dependencies will be listed here

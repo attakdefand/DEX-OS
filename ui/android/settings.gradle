@@ -1,0 +1,9 @@
+rootProject.name = 'dexos-android'
+
+include ':app'
+
+// Include Rust modules
+include ':kernel'
+include ':security'
+include ':crypto'
+include ':p2p'
