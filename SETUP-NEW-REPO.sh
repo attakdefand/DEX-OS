@@ -12,6 +12,10 @@ echo "2. Name it \"DEX-REPO\""
 echo "3. Do NOT initialize with a README"
 echo "4. Click \"Create repository\""
 echo ""
+
+read -p "Enter your GitHub username: " github_username
+
+echo ""
 echo "After creating the repository, this script will push your code."
 
 echo ""
@@ -20,7 +24,7 @@ read -p "Press Enter to continue with the push process..."
 echo ""
 echo "Setting remote URL to your repository..."
 cd d:\DEX-OS\dex-os\dex-os
-git remote set-url origin https://github.com/attakdefand/DEX-REPO.git
+git remote set-url origin https://github.com/$github_username/DEX-REPO.git
 
 echo ""
 echo "Pushing code to your new repository..."
@@ -28,7 +32,7 @@ git push -u origin main
 
 echo ""
 echo "Push completed! Your repository should now be available at:"
-echo "https://github.com/attakdefand/DEX-REPO"
+echo "https://github.com/$github_username/DEX-REPO"
 
 echo ""
 echo "If you get authentication errors, you may need to:"
