@@ -37,9 +37,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: dexos
-      POSTGRES_PASSWORD: dexos_password
-      POSTGRES_DB: dexos_db
+      - POSTGRES_USER=${POSTGRES_USER:-dexos}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-dexos_password}
+      - POSTGRES_DB=${POSTGRES_DB:-dexos_db}
     ports:
       - "5432:5432"
     volumes:
