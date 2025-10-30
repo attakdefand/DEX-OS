@@ -19,6 +19,16 @@ A decentralized exchange operating system built with Rust.
 - Android SDK and NDK (for Android deployment)
 - Visual Studio Build Tools (for Windows development)
 
+### Environment Variables
+
+Create a `.env` file in the project root based on `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Then edit the `.env` file to set your configuration values.
+
 ### Building
 
 ```bash
