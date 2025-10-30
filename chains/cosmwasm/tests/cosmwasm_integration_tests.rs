@@ -28,7 +28,7 @@ fn test_cosmwasm_token_struct() {
         symbol: "COSM".to_string(),
         decimals: 6,
     };
-    
+
     assert_eq!(token.symbol, "COSM");
     assert_eq!(token.decimals, 6);
 }
@@ -45,7 +45,7 @@ fn test_cosmwasm_transaction_struct() {
         gas_limit: 200000,
         sequence: 0,
     };
-    
+
     assert_eq!(tx.denom, "uatom");
 }
 
@@ -54,11 +54,11 @@ fn test_cosmwasm_transaction_struct() {
 fn test_security_integration() {
     // Test that the security modules can be instantiated
     use security::{Authentication, Authorization, KeyManager};
-    
+
     let _auth = Authentication::new();
     let _authz = Authorization::new();
     let _key_manager = KeyManager::new();
-    
+
     // These should compile and instantiate without errors
     assert!(true);
 }
@@ -67,13 +67,13 @@ fn test_security_integration() {
 #[test]
 fn test_crypto_integration() {
     // Test that the crypto modules can be instantiated
-    use crypto::{SignatureVerifier, ZeroKnowledgeProof, Hasher, Encryption};
-    
+    use crypto::{Encryption, Hasher, SignatureVerifier, ZeroKnowledgeProof};
+
     let _verifier = SignatureVerifier::new();
     let _zk = ZeroKnowledgeProof::new();
     let _hasher = Hasher::new();
     let _encryptor = Encryption::new();
-    
+
     // These should compile and instantiate without errors
     assert!(true);
 }
@@ -100,7 +100,7 @@ fn test_transaction_validation() {
         gas_limit: 500000, // Within limit
         sequence: 0,
     };
-    
+
     // Test gas limit validation would go here if we could instantiate the adapter
     assert!(tx.gas_limit <= config.gas_limit);
 }

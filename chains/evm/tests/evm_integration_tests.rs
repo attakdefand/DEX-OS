@@ -1,7 +1,7 @@
 //! Integration tests for the EVM chain adapter
 
-use evm_chain::{EVMConfig, EVMToken, EVMTransaction};
 use ethereum_types::{H160, U256};
+use evm_chain::{EVMConfig, EVMToken, EVMTransaction};
 use std::str::FromStr;
 
 /// Test EVM configuration
@@ -32,7 +32,7 @@ fn test_evm_token_struct() {
         symbol: "UNI".to_string(),
         decimals: 18,
     };
-    
+
     assert_eq!(token.symbol, "UNI");
     assert_eq!(token.decimals, 18);
 }
@@ -49,7 +49,7 @@ fn test_evm_transaction_struct() {
         gas_price: U256::zero(),
         nonce: 0,
     };
-    
+
     assert_eq!(tx.gas_limit, 1_000_000);
 }
 
@@ -58,11 +58,11 @@ fn test_evm_transaction_struct() {
 fn test_security_integration() {
     // Test that the security modules can be instantiated
     use security::{Authentication, Authorization, KeyManager};
-    
+
     let _auth = Authentication::new();
     let _authz = Authorization::new();
     let _key_manager = KeyManager::new();
-    
+
     // These should compile and instantiate without errors
     assert!(true);
 }
@@ -71,13 +71,13 @@ fn test_security_integration() {
 #[test]
 fn test_crypto_integration() {
     // Test that the crypto modules can be instantiated
-    use crypto::{SignatureVerifier, ZeroKnowledgeProof, Hasher, Encryption};
-    
+    use crypto::{Encryption, Hasher, SignatureVerifier, ZeroKnowledgeProof};
+
     let _verifier = SignatureVerifier::new();
     let _zk = ZeroKnowledgeProof::new();
     let _hasher = Hasher::new();
     let _encryptor = Encryption::new();
-    
+
     // These should compile and instantiate without errors
     assert!(true);
 }
@@ -104,7 +104,7 @@ fn test_transaction_validation() {
         gas_price: U256::zero(),
         nonce: 0,
     };
-    
+
     // Test gas limit validation would go here if we could instantiate the adapter
     assert!(tx.gas_limit <= config.gas_limit);
 }

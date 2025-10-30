@@ -9,8 +9,8 @@ use thiserror::Error;
 use tracing::{debug, error, info, trace, warn};
 
 // Import security and crypto modules
-use security::KeyManager;
 use crypto::SignatureVerifier;
+use security::KeyManager;
 
 /// EVM chain adapter error types
 #[derive(Error, Debug)]
@@ -67,119 +67,129 @@ pub struct EVMChainAdapter {
 impl EVMChainAdapter {
     /// Create a new EVM chain adapter
     pub fn new(config: EVMConfig) -> Result<Self, EVMError> {
-        info!("Initializing EVM chain adapter for chain ID: {}", config.chain_id);
-        
+        info!(
+            "Initializing EVM chain adapter for chain ID: {}",
+            config.chain_id
+        );
+
         // Initialize security components
         let key_manager = KeyManager::new();
         let signature_verifier = SignatureVerifier::new();
-        
+
         Ok(Self {
             config,
             key_manager,
             signature_verifier,
         })
     }
-    
+
     /// Get the chain ID
     pub fn chain_id(&self) -> u64 {
         self.config.chain_id
     }
-    
+
     /// Get account balance
     pub fn get_balance(&self, address: H160) -> Result<U256, EVMError> {
         debug!("Getting balance for address: {:?}", address);
-        
+
         // In a real implementation, this would call the EVM RPC
         // For now, we'll return a placeholder value
         let balance = U256::from(1000000000000000000u64); // 1 ETH in wei
-            
+
         trace!("Balance for {:?}: {}", address, balance);
         Ok(balance)
     }
-    
+
     /// Get token balance
     pub fn get_token_balance(&self, _token: H160, address: H160) -> Result<U256, EVMError> {
         debug!("Getting token balance for address: {:?}", address);
-        
+
         // In a real implementation, this would call the EVM RPC
         // For now, we'll return a placeholder value
         let balance = U256::from(5000000000u64); // 50 tokens with 8 decimals
-            
+
         trace!("Token balance for address {:?}: {}", address, balance);
         Ok(balance)
     }
-    
+
     /// Get transaction count (nonce)
     pub fn get_transaction_count(&self, address: H160) -> Result<U256, EVMError> {
         debug!("Getting transaction count for address: {:?}", address);
-        
+
         // In a real implementation, this would call the EVM RPC
         // For now, we'll return a placeholder value
         let nonce = U256::from(42u64);
-            
+
         trace!("Transaction count for {:?}: {}", address, nonce);
         Ok(nonce)
     }
-    
+
     /// Estimate gas for a transaction
     pub fn estimate_gas(&self, _tx: &EVMTransaction) -> Result<U256, EVMError> {
         debug!("Estimating gas for transaction");
-        
+
         // In a real implementation, this would call the EVM RPC
         // For now, we'll return a placeholder value
         let gas = U256::from(21000u64);
-            
+
         trace!("Estimated gas: {}", gas);
         Ok(gas)
     }
-    
+
     /// Sign and send a transaction with security protection
-    pub fn send_transaction(&self, tx: EVMTransaction, _private_key: &str) -> Result<H256, EVMError> {
+    pub fn send_transaction(
+        &self,
+        tx: EVMTransaction,
+        _private_key: &str,
+    ) -> Result<H256, EVMError> {
         info!("Sending transaction from: {:?}", tx.from);
-        
+
         // Security check: Verify transaction parameters
         self.validate_transaction(&tx)?;
-        
+
         // In a real implementation, this would sign and send the transaction
         // For now, we'll return a placeholder transaction hash
         let tx_hash = H256::from_low_u64_be(0x123456789abcdef);
-            
+
         info!("Transaction sent with hash: {:?}", tx_hash);
         Ok(tx_hash)
     }
-    
+
     /// Validate transaction with security checks
     fn validate_transaction(&self, tx: &EVMTransaction) -> Result<(), EVMError> {
         debug!("Validating transaction");
-        
+
         // Check gas limit
         if tx.gas_limit > self.config.gas_limit {
-            return Err(EVMError::TransactionError(
-                format!("Gas limit {} exceeds maximum {}", tx.gas_limit, self.config.gas_limit)
-            ));
+            return Err(EVMError::TransactionError(format!(
+                "Gas limit {} exceeds maximum {}",
+                tx.gas_limit, self.config.gas_limit
+            )));
         }
-        
+
         // Check for zero value transfers to known scam addresses
         if tx.value.is_zero() && self.is_known_scam_address(tx.to) {
             warn!("Transaction to known scam address detected: {:?}", tx.to);
-            return Err(EVMError::SecurityError("Transaction to blocked address".to_string()));
+            return Err(EVMError::SecurityError(
+                "Transaction to blocked address".to_string(),
+            ));
         }
-        
+
         // Additional security validations can be added here
         Ok(())
     }
-    
+
     /// Check if an address is a known scam address
     fn is_known_scam_address(&self, _address: H160) -> bool {
         // This would typically check against a database of known malicious addresses
         // For now, we'll return false as a placeholder
         false
     }
-    
+
     /// Get token information
     pub fn get_token_info(&self, token_address: H160) -> Result<EVMToken, EVMError> {
         debug!("Getting token info for: {:?}", token_address);
-        
+
         // In a real implementation, this would call the EVM RPC
         // For now, we'll return placeholder token information
         let token = EVMToken {
@@ -188,10 +198,10 @@ impl EVMChainAdapter {
             symbol: "TTK".to_string(),
             decimals: 18,
         };
-        
+
         Ok(token)
     }
-    
+
     /// Perform a token swap with MEV protection
     pub fn swap_tokens(
         &self,
@@ -202,15 +212,18 @@ impl EVMChainAdapter {
         user_address: H160,
         _private_key: &str,
     ) -> Result<H256, EVMError> {
-        info!("Performing token swap: {:?} -> {:?}, amount: {}", from_token, to_token, amount);
-        
+        info!(
+            "Performing token swap: {:?} -> {:?}, amount: {}",
+            from_token, to_token, amount
+        );
+
         // MEV protection: Use a private mempool or batch with other transactions
         // This is a simplified implementation - in practice, this would integrate with
         // a MEV protection service like Flashbots
-        
+
         // For demonstration, we'll create a simple swap transaction
         // In a real implementation, this would interact with a DEX router
-        
+
         let tx = EVMTransaction {
             from: user_address,
             to: from_token, // This would be the DEX router in a real implementation
@@ -220,10 +233,10 @@ impl EVMChainAdapter {
             gas_price: U256::from(20_000_000_000u64), // 20 Gwei
             nonce: 42, // Would be obtained from get_transaction_count in real implementation
         };
-        
+
         // Send the transaction
         let tx_hash = self.send_transaction(tx, _private_key)?;
-        
+
         info!("Token swap transaction submitted: {:?}", tx_hash);
         Ok(tx_hash)
     }
@@ -240,7 +253,7 @@ pub fn init() -> Result<(), EVMError> {
 mod tests {
     use super::*;
     use std::str::FromStr;
-    
+
     #[test]
     fn test_evm_adapter_creation() {
         let config = EVMConfig {
@@ -249,11 +262,11 @@ mod tests {
             gas_limit: 10_000_000,
             gas_price: 20_000_000_000,
         };
-        
+
         let adapter = EVMChainAdapter::new(config);
         assert!(adapter.is_ok());
     }
-    
+
     #[test]
     fn test_evm_token_struct() {
         let token_address = H160::from_str("0x1f9840a85d5af5bf1d1762f925bdaddc4201f984").unwrap();
@@ -263,11 +276,11 @@ mod tests {
             symbol: "UNI".to_string(),
             decimals: 18,
         };
-        
+
         assert_eq!(token.symbol, "UNI");
         assert_eq!(token.decimals, 18);
     }
-    
+
     #[test]
     fn test_transaction_validation() {
         let config = EVMConfig {
@@ -276,9 +289,9 @@ mod tests {
             gas_limit: 10_000_000,
             gas_price: 20_000_000_000,
         };
-        
+
         let adapter = EVMChainAdapter::new(config).unwrap();
-        
+
         let tx = EVMTransaction {
             from: H160::zero(),
             to: H160::zero(),
@@ -288,11 +301,11 @@ mod tests {
             gas_price: U256::zero(),
             nonce: 0,
         };
-        
+
         // This should pass validation
         assert!(adapter.validate_transaction(&tx).is_ok());
     }
-    
+
     #[test]
     fn test_transaction_gas_limit_validation() {
         let config = EVMConfig {
@@ -301,9 +314,9 @@ mod tests {
             gas_limit: 10_000_000,
             gas_price: 20_000_000_000,
         };
-        
+
         let adapter = EVMChainAdapter::new(config).unwrap();
-        
+
         let tx = EVMTransaction {
             from: H160::zero(),
             to: H160::zero(),
@@ -313,11 +326,11 @@ mod tests {
             gas_price: U256::zero(),
             nonce: 0,
         };
-        
+
         // This should fail validation
         assert!(adapter.validate_transaction(&tx).is_err());
     }
-    
+
     #[test]
     fn test_get_balance() {
         let config = EVMConfig {
@@ -326,12 +339,12 @@ mod tests {
             gas_limit: 10_000_000,
             gas_price: 20_000_000_000,
         };
-        
+
         let adapter = EVMChainAdapter::new(config).unwrap();
         let balance = adapter.get_balance(H160::zero());
         assert!(balance.is_ok());
     }
-    
+
     #[test]
     fn test_get_token_balance() {
         let config = EVMConfig {
@@ -340,7 +353,7 @@ mod tests {
             gas_limit: 10_000_000,
             gas_price: 20_000_000_000,
         };
-        
+
         let adapter = EVMChainAdapter::new(config).unwrap();
         let balance = adapter.get_token_balance(H160::zero(), H160::zero());
         assert!(balance.is_ok());
